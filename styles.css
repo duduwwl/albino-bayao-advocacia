@@ -144,7 +144,7 @@ blockquote { max-width: 650px; margin: 26px 0 34px; font: 500 clamp(24px, 3vw, 4
 .process-list p { max-width: 200px; margin: 0; color: #666666; font-size: 12px; line-height: 1.45; }
 
 .contact { padding: 0 clamp(18px, 3vw, 42px) 42px; background: var(--forest); color: var(--cream); }
-.contact-wrap { padding: clamp(54px, 7vw, 100px) clamp(24px, 6vw, 95px) 74px; background: var(--cream); color: var(--forest); }
+.contact-wrap { padding: clamp(40px, 5vw, 72px) clamp(24px, 6vw, 95px) 74px; background: var(--cream); color: var(--forest); }
 .contact-top { display: flex; justify-content: space-between; margin-bottom: 100px; }
 .contact-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--yellow); }
 .contact-grid { display: grid; grid-template-columns: 1.05fr .75fr; gap: 12vw; align-items: end; }
