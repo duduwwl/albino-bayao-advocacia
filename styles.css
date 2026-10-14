@@ -107,7 +107,8 @@ blockquote { max-width: 650px; margin: 26px 0 34px; font: 500 clamp(24px, 3vw, 4
 .practice-card-coral a { border-color: var(--cream); }
 .practice-card-yellow { background: var(--yellow); }
 .card-number { font: 10px var(--mono); }
-.card-icon { margin: 30px 0 18px; font-size: 38px; line-height: 1; }
+.card-icon { display: grid; width: 48px; height: 48px; margin: 30px 0 18px; place-items: center; }
+.card-icon svg { display: block; width: 44px; height: 44px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; }
 .practice-card h3 { margin-bottom: 22px; font-size: clamp(30px, 3.2vw, 48px); font-weight: 500; letter-spacing: -.06em; line-height: .9; }
 .practice-card p { max-width: 240px; margin-bottom: 25px; color: rgba(17, 17, 17, .78); font-size: 13px; line-height: 1.45; }
 .practice-card-coral p { color: rgba(255, 255, 255, .72); }
