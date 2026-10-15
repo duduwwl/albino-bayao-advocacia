@@ -16,6 +16,25 @@
     });
   });
 
+  const editorialHero = document.querySelector('.hero-editorial');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (editorialHero && !reducedMotion) {
+    let ticking = false;
+    const updateHeroDepth = () => {
+      const bounds = editorialHero.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, -bounds.top / Math.max(bounds.height, 1)));
+      editorialHero.style.setProperty('--hero-parallax', `${progress * 18}px`);
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeroDepth);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateHeroDepth();
+  }
+
   const form = document.querySelector('#contact-form');
   const status = document.querySelector('.form-status');
   form?.addEventListener('submit', (event) => {
