@@ -802,6 +802,8 @@ body,
 .hero-carousel { position: relative; isolation: isolate; background: var(--surface-black); }
 .hero-slide { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: visible; transition: opacity .7s ease; will-change: opacity; }
 .hero-slide.is-active { z-index: 1; opacity: 1; }
+.hero-slide:first-child { background: url("assets/mariana.png") center 43% / cover no-repeat; }
+.hero-slide:nth-child(2) { background: url("assets/diogo.png") 36% 60% / 134% auto no-repeat; }
 .hero-slide-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 43%; filter: saturate(.98) contrast(1.01); transform: scale(1.015); transition: transform 6s ease; }
 .hero-slide-photo-diogo { object-position: 36% 60%; transform: scale(1.34); }
 .hero-carousel:hover .hero-slide.is-active .hero-slide-photo:not(.hero-slide-photo-diogo) { transform: scale(1.045); }
