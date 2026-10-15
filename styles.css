@@ -462,7 +462,7 @@ blockquote { max-width: 650px; margin: 26px 0 34px; font: 500 clamp(24px, 3vw, 4
 }
 .opening-portrait-mariana img { object-position: center 41%; }
 .opening-portrait-diogo { background: #f8f9f7; }
-.opening-portrait-diogo img { object-position: center; animation: none; transform: scale(1.28); }
+.opening-portrait-diogo img { object-position: center; animation: none; transform: scale(1.5); }
 .opening-portrait figcaption {
   position: absolute;
   right: 0;
@@ -523,7 +523,7 @@ blockquote { max-width: 650px; margin: 26px 0 34px; font: 500 clamp(24px, 3vw, 4
   .opening-portrait-mariana { height: 390px; }
   .opening-portrait-mariana img { object-position: 54% center; }
   .opening-portrait-diogo { height: 250px; border-top: 1px solid rgba(23, 33, 42, .18); border-left: 0; }
-  .opening-portrait-diogo img { width: 250px; object-fit: cover; transform: scale(1.45); }
+  .opening-portrait-diogo img { width: 250px; object-fit: cover; transform: scale(1.5); }
   .opening-portrait-diogo figcaption { left: 250px; top: 0; display: flex; align-items: flex-start; justify-content: center; flex-direction: column; }
   .opening-portrait-diogo figcaption span { margin-top: 4px; }
   .opening + .intro { padding-top: 62px; }
