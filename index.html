@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=refined-hero" />
+    <link rel="stylesheet" href="styles.css?v=dark-carousel" />
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
@@ -36,10 +36,20 @@
           </div>
 
           <div class="hero-media-band">
-            <figure class="hero-main-photo">
-              <img src="assets/mariana.png" alt="Mariana Albino diante de uma estante de livros jurídicos" width="909" height="603" fetchpriority="high" />
-              <figcaption><strong>Mariana Albino</strong><span>Advogada · Direito de família</span></figcaption>
-            </figure>
+            <div class="hero-main-photo hero-carousel" role="region" aria-roledescription="carrossel" aria-label="Advogados do escritório" data-hero-carousel>
+              <figure class="hero-slide is-active" aria-hidden="false">
+                <img class="hero-slide-photo" src="assets/mariana.png" alt="Mariana Albino diante de uma estante de livros jurídicos" width="909" height="603" fetchpriority="high" />
+                <figcaption><strong>Mariana Albino</strong><span>Advogada · Direito de família</span></figcaption>
+              </figure>
+              <figure class="hero-slide" aria-hidden="true">
+                <img class="hero-slide-photo hero-slide-photo-diogo" src="assets/diogo-hq.png" alt="Diogo Bayao em uma praça histórica" width="1254" height="1254" />
+                <figcaption><strong>Diogo Bayao</strong><span>Advogado</span></figcaption>
+              </figure>
+              <div class="hero-carousel-controls" aria-label="Selecionar fotografia">
+                <button type="button" aria-label="Mostrar Mariana Albino" aria-current="true" data-carousel-go="0"></button>
+                <button type="button" aria-label="Mostrar Diogo Bayao" aria-current="false" data-carousel-go="1"></button>
+              </div>
+            </div>
             <aside class="hero-practice-summary" aria-labelledby="hero-practice-title">
               <h2 id="hero-practice-title">Áreas de atuação</h2>
               <ul>
@@ -76,7 +86,7 @@
     </main>
 
     <footer class="site-footer"><div class="footer-main"><a class="logo" href="#inicio"><span class="logo-symbol">A<span>/</span>B</span><span class="logo-name">ALBINO <i>&</i> BAYAO</span></a><p>Mariana Albino &amp; Diogo Bayao<br /><em>Advogados</em></p><a class="back-top" href="#inicio">Voltar ao topo <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© 2026 Albino & Bayao</span><span>Escritório de advocacia</span><a href="https://www.instagram.com/marianaalbino.adv/" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a></div></footer>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=dark-carousel" defer></script>
   </body>
 </html>
 
