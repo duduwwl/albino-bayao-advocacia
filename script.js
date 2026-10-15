@@ -59,7 +59,16 @@
     if (document.hidden) stopCarousel();
     else startCarousel();
   });
-  startCarousel();
+  const carouselImages = slides.map((slide) => slide.querySelector('img')).filter(Boolean);
+  const carouselReady = carouselImages.map((image) => {
+    if (typeof image.decode === 'function') return image.decode().catch(() => undefined);
+    if (image.complete && image.naturalWidth) return Promise.resolve();
+    return new Promise((resolve) => {
+      image.addEventListener('load', resolve, { once: true });
+      image.addEventListener('error', resolve, { once: true });
+    });
+  });
+  Promise.all(carouselReady).then(startCarousel);
 
   const form = document.querySelector('#contact-form');
   const status = document.querySelector('.form-status');
