@@ -750,3 +750,144 @@ blockquote { max-width: 650px; margin: 26px 0 34px; font: 500 clamp(24px, 3vw, 4
   .hero-main-photo img, .hero-primary-cta, .hero-secondary-cta::after { transition: none; }
 }
 
+/* Dark institutional theme and two-lawyer photographic carousel. */
+:root {
+  --page-black: #050607;
+  --surface-black: #0d1115;
+  --text-white: #f5f6f4;
+  --text-soft: rgba(245, 246, 244, .7);
+  --dark-rule: rgba(245, 246, 244, .2);
+}
+
+body,
+.hero-institutional,
+.intro,
+.team,
+.practice,
+.contact,
+.contact-wrap,
+.site-footer {
+  background: var(--page-black);
+  color: var(--text-white);
+}
+
+.site-header {
+  background: rgba(5, 6, 7, .94);
+  border-bottom-color: var(--dark-rule);
+}
+.site-header .logo,
+.desktop-nav a,
+.header-cta { color: var(--text-white); }
+.header-cta { border-color: var(--text-white); }
+.desktop-nav a::after { background: var(--text-white); }
+
+.hero-institutional { border-bottom: 1px solid var(--dark-rule); }
+.hero-office-name,
+.hero-institutional h1,
+.hero-practice-summary h2,
+.hero-practice-summary li,
+.hero-practice-summary a { color: var(--text-white); }
+.hero-summary { color: var(--text-soft); }
+.hero-primary-cta { background: var(--text-white); color: var(--page-black); }
+.hero-primary-cta:hover,
+.hero-primary-cta:focus-visible { background: transparent; color: var(--text-white); border-color: var(--text-white); }
+.hero-secondary-cta { color: var(--text-white); }
+.hero-secondary-cta::after { background: var(--text-white); }
+.hero-media-band { border: 1px solid var(--dark-rule); box-shadow: 0 24px 60px rgba(0, 0, 0, .35); }
+.hero-practice-summary { background: var(--surface-black); border-left-color: var(--dark-rule); }
+.hero-practice-summary li,
+.hero-practice-summary a { border-color: var(--dark-rule); }
+.hero-institutional + .intro { border-top: 0; }
+
+.hero-carousel { position: relative; isolation: isolate; background: var(--surface-black); }
+.hero-slide { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility .8s ease; }
+.hero-slide.is-active { z-index: 1; opacity: 1; visibility: visible; }
+.hero-slide-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 43%; filter: saturate(.98) contrast(1.01); transform: scale(1.015); transition: transform 6s ease; }
+.hero-slide-photo-diogo { object-position: 36% 60%; transform: scale(1.34); }
+.hero-carousel:hover .hero-slide.is-active .hero-slide-photo:not(.hero-slide-photo-diogo) { transform: scale(1.045); }
+.hero-carousel:hover .hero-slide.is-active .hero-slide-photo-diogo { transform: scale(1.38); }
+.hero-slide figcaption { position: absolute; right: 0; bottom: 0; left: 0; z-index: 2; display: flex; justify-content: space-between; gap: 20px; padding: 16px 22px; background: linear-gradient(90deg, rgba(5, 6, 7, .96), rgba(5, 6, 7, .72)); color: var(--text-white); font-size: 12px; }
+.hero-slide figcaption span { color: var(--text-soft); }
+.hero-carousel-controls { position: absolute; top: 18px; right: 18px; z-index: 3; display: flex; gap: 8px; padding: 8px; background: rgba(5, 6, 7, .72); }
+.hero-carousel-controls button { width: 30px; height: 4px; padding: 0; border: 0; background: rgba(255, 255, 255, .38); cursor: pointer; transition: background .25s ease, transform .25s ease; }
+.hero-carousel-controls button[aria-current="true"] { background: var(--text-white); }
+.hero-carousel-controls button:hover,
+.hero-carousel-controls button:focus-visible { background: var(--text-white); transform: scaleY(1.8); }
+
+.section-kicker,
+.section-kicker span:first-child,
+.eyebrow,
+.intro-body,
+.practice-head > p,
+.person-info > p:not(.person-role),
+.person-role,
+.contact-copy,
+.contact .section-kicker.light,
+.contact .eyebrow.light,
+.contact .section-kicker.light span:first-child { color: var(--text-soft); }
+.intro h2,
+.team h2,
+.person-info h3,
+.contact h2,
+.arrow-link,
+.whatsapp-link,
+.contact-form label,
+.contact-form input,
+.contact-form textarea { color: var(--text-white); }
+.arrow-link,
+.whatsapp-link span { border-color: var(--text-white); }
+.quote-card { background: var(--surface-black); border: 1px solid var(--dark-rule); }
+.quote-author,
+.quote-author span,
+.person-mariana .person-role,
+.person-diogo .person-role { color: var(--text-white); }
+
+.practice { border-top: 1px solid var(--dark-rule); border-bottom: 1px solid var(--dark-rule); }
+.practice-card,
+.practice-card-main,
+.practice-card-coral,
+.practice-card-yellow { background: var(--surface-black); color: var(--text-white); border: 1px solid var(--dark-rule); }
+.practice-card p,
+.practice-card-coral p { color: var(--text-soft); }
+.practice-card a,
+.practice-card-coral a { color: var(--text-white); border-color: var(--text-white); }
+.card-icon { color: var(--text-white); }
+.person-photo { background: var(--surface-black); }
+
+.contact { border-top: 1px solid var(--dark-rule); }
+.contact-wrap { border: 1px solid var(--dark-rule); }
+.contact-form { border-color: var(--dark-rule); }
+.contact-form input,
+.contact-form textarea { border-color: var(--dark-rule); }
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: rgba(245, 246, 244, .5); }
+.contact-form input:focus,
+.contact-form textarea:focus { border-color: var(--text-white); }
+.button-cream { background: var(--text-white); color: var(--page-black); }
+.site-footer { border-top: 1px solid var(--dark-rule); }
+.site-footer .logo,
+.footer-main p,
+.footer-main p em,
+.back-top,
+.footer-bottom,
+.footer-bottom a { color: var(--text-white); }
+.footer-bottom { border-color: var(--dark-rule); }
+
+@media (max-width: 980px) {
+  .menu-toggle span { background: var(--text-white); }
+  .mobile-nav { background: var(--page-black); color: var(--text-white); border-bottom-color: var(--dark-rule); }
+  .mobile-nav a { border-color: var(--dark-rule); }
+}
+
+@media (max-width: 640px) {
+  .hero-practice-summary { border-top-color: var(--dark-rule); }
+  .hero-slide figcaption { padding: 14px 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { transition: none; }
+  .hero-slide-photo,
+  .hero-slide-photo-diogo { transform: scale(1.34); transition: none; }
+  .hero-slide:first-child .hero-slide-photo { transform: scale(1.015); }
+}
+
