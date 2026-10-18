@@ -1279,7 +1279,7 @@ body { padding-top: 76px; }
 .header-cta { white-space: nowrap; }
 @media (min-width: 821px) { .menu-toggle { display: none; } }
 .continuous-tabs { width: min(100%, 520px); min-height: 40px; padding: 4px 5px; gap: 2px; justify-content: center; }
-.continuous-tabs a { min-height: 31px; padding: 0 11px; font-size: 9px; letter-spacing: -.025em; }
+.continuous-tabs a { min-height: 31px; padding: 0 11px; font: 400 8.5px/1.4 var(--sans); letter-spacing: .025em; }
 .continuous-tabs-indicator { top: var(--tab-y, 4px); height: var(--tab-height, 31px); }
 .continuous-tabs a::after { display: none; }
 
