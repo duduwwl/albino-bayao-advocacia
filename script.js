@@ -9,14 +9,12 @@
     mobileNav?.classList.remove('is-open');
     menuButton?.setAttribute('aria-expanded', 'false');
     menuButton?.setAttribute('aria-label', 'Abrir menu');
-    header?.classList.remove('is-scrolling-down');
   };
 
   menuButton?.addEventListener('click', () => {
     const open = mobileNav?.classList.toggle('is-open') ?? false;
     menuButton.setAttribute('aria-expanded', String(open));
     menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-    if (open) header?.classList.remove('is-scrolling-down');
     if (open) window.requestAnimationFrame(() => syncAllContinuousTabs?.());
   });
   mobileNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileNav));
@@ -25,17 +23,8 @@
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
     const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
     progressBar?.style.setProperty('transform', `scaleX(${ratio})`);
-    const currentY = window.scrollY;
-    const movingDown = currentY - lastScrollY > 2;
-    const movingUp = lastScrollY - currentY > 2;
-    header?.classList.toggle('is-scrolled', currentY > 18);
-    if (currentY <= 18 || movingUp) header?.classList.remove('is-scrolling-down');
-    if (movingDown && currentY > 90 && !mobileNav?.classList.contains('is-open')) header?.classList.add('is-scrolling-down');
-    if (movingUp) header?.classList.add('is-scrolling-up');
-    if (movingDown) header?.classList.remove('is-scrolling-up');
-    lastScrollY = currentY;
+    header?.classList.toggle('is-scrolled', window.scrollY > 18);
   };
-  let lastScrollY = window.scrollY;
   let scrollTick = false;
   const requestScrollSync = () => {
     if (scrollTick) return;
@@ -48,57 +37,6 @@
   window.addEventListener('scroll', requestScrollSync, { passive: true });
   window.addEventListener('resize', requestScrollSync, { passive: true });
   syncScrollState();
-
-  // TextEffect per-char/fade adapted for the static site: preserve semantic markup,
-  // expose the original phrase to assistive technology, and animate only on entry.
-  const textEffectSelector = [
-    'main h1', 'main h2', 'main h3', 'main p', 'main li', 'main a', 'main button', 'main label', 'main summary',
-    '.site-header .logo-name', '.site-header .header-cta', '.site-header .continuous-tabs a',
-    '.person-label', '.detail-index', '.process-panel-number', '.footer-main p', '.footer-bottom span',
-  ].join(', ');
-  const textEffectElements = [...document.querySelectorAll(textEffectSelector)].filter((element) => {
-    if (!element.textContent.trim() || element.closest('[aria-hidden="true"]')) return false;
-    return !element.parentElement?.closest(textEffectSelector);
-  });
-  const textEffectObserver = 'IntersectionObserver' in window && !reduceMotion.matches
-    ? new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-text-effect-visible');
-        observer.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 })
-    : null;
-  textEffectElements.forEach((element, elementIndex) => {
-    const phrase = element.textContent.trim();
-    element.setAttribute('aria-label', phrase);
-    element.dataset.textEffect = 'per-char-fade';
-    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-    const textNodes = [];
-    while (walker.nextNode()) textNodes.push(walker.currentNode);
-    let charIndex = 0;
-    textNodes.forEach((node) => {
-      if (!node.nodeValue?.trim()) return;
-      const fragment = document.createDocumentFragment();
-      [...node.nodeValue].forEach((character) => {
-        if (/\s/.test(character)) {
-          fragment.append(character);
-          return;
-        }
-        const char = document.createElement('span');
-        char.className = 'text-effect-char';
-        char.setAttribute('aria-hidden', 'true');
-        char.style.setProperty('--char-index', String(Math.min(charIndex, 42)));
-        char.style.setProperty('--text-effect-delay', `${(elementIndex % 5) * 30}ms`);
-        char.textContent = character;
-        fragment.append(char);
-        charIndex += 1;
-      });
-      node.parentNode?.replaceChild(fragment, node);
-    });
-    if (textEffectObserver) textEffectObserver.observe(element);
-    else element.classList.add('is-text-effect-visible');
-  });
 
   const revealTargets = [
     ...document.querySelectorAll('.intro-grid, .quote-card, .practice-head, .practice-card, .practice-detail-layout, .practice-detail-panel, .process-head, .process-layout, .team-head, .person, .faq-layout, .contact-grid, .site-footer'),
