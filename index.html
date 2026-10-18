@@ -12,18 +12,18 @@
     <link rel="preload" href="assets/mariana.png" as="image" />
     <link rel="preload" href="diogo-hero-v2.jpg" as="image" />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=interactive-v1" />
+    <link rel="stylesheet" href="styles.css?v=complete-v2c" />
   </head>
-  <body data-release="interactive-v1">
+  <body data-release="complete-v2c">
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
     <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
     <header class="site-header">
       <a class="logo" href="#inicio" aria-label="Albino e Bayao, início"><span class="logo-symbol">A<span>/</span>B</span><span class="logo-name">ALBINO <i>&</i> BAYAO</span></a>
-      <nav class="desktop-nav" aria-label="Navegação principal"><a href="#escritorio">Escritório</a><a href="#atuacao">Atuação</a><a href="#equipe">Equipe</a><a href="#contato">Contato</a></nav>
+      <nav class="desktop-nav continuous-tabs" aria-label="Navegação principal" data-continuous-tabs><span class="continuous-tabs-indicator" aria-hidden="true"></span><a href="#escritorio" data-continuous-tab>Escritório</a><a href="#atuacao" data-continuous-tab>Atuação</a><a href="#processo" data-continuous-tab>Processo</a><a href="#equipe" data-continuous-tab>Equipe</a><a href="#duvidas" data-continuous-tab>Dúvidas</a><a href="#contato" data-continuous-tab>Contato</a></nav>
       <a class="header-cta" href="#contato">Falar com a equipe</a>
       <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
     </header>
-    <nav class="mobile-nav" aria-label="Navegação mobile"><a href="#escritorio">Escritório</a><a href="#atuacao">Atuação</a><a href="#equipe">Equipe</a><a href="#contato">Contato</a></nav>
+    <nav class="mobile-nav continuous-tabs-mobile" aria-label="Navegação mobile"><span class="continuous-tabs-indicator" aria-hidden="true"></span><a href="#escritorio" data-continuous-tab>Escritório</a><a href="#atuacao" data-continuous-tab>Atuação</a><a href="#processo" data-continuous-tab>Processo</a><a href="#equipe" data-continuous-tab>Equipe</a><a href="#duvidas" data-continuous-tab>Dúvidas</a><a href="#contato" data-continuous-tab>Contato</a></nav>
 
     <main id="conteudo">
       <section class="hero-institutional" id="inicio" aria-labelledby="hero-title">
@@ -80,15 +80,73 @@
         </div></div>
       </section>
 
+      <section class="practice-detail section-wrap" id="atuacao-detalhes" aria-labelledby="practice-detail-title">
+        <div class="section-kicker"><span>Leitura do caso</span></div>
+        <div class="practice-detail-layout">
+          <div class="practice-detail-intro">
+            <p class="eyebrow">Escolha um ponto de partida</p>
+            <h2 id="practice-detail-title">Cada caso pede uma<br /><em>pergunta diferente.</em></h2>
+            <p>Conheça a forma como organizamos a conversa inicial. O conteúdo é informativo e não substitui a análise individual de uma situação concreta.</p>
+            <div class="practice-tabs" role="tablist" aria-label="Detalhes das áreas de atuação">
+              <button type="button" role="tab" aria-selected="true" aria-controls="practice-panel-familia" id="practice-tab-familia" data-practice-tab="familia">Direito de família</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="practice-panel-direitos" id="practice-tab-direitos" data-practice-tab="direitos">Defesa de direitos</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="practice-panel-estrategia" id="practice-tab-estrategia" data-practice-tab="estrategia">Orientação estratégica</button>
+            </div>
+          </div>
+          <div class="practice-detail-panels">
+            <article class="practice-detail-panel is-active" id="practice-panel-familia" role="tabpanel" aria-labelledby="practice-tab-familia" data-practice-panel="familia">
+              <span class="detail-index">01</span><h3>Direito de família</h3><p>Uma conversa sobre separação, proteção, responsabilidades e reorganização da vida familiar, com espaço para entender o que realmente precisa ser decidido.</p><ul><li>Contexto e prioridades</li><li>Riscos e possibilidades</li><li>Próximos passos possíveis</li></ul><a class="arrow-link" href="#contato">Conversar sobre este tema <span aria-hidden="true">↘</span></a>
+            </article>
+            <article class="practice-detail-panel" id="practice-panel-direitos" role="tabpanel" aria-labelledby="practice-tab-direitos" data-practice-panel="direitos" hidden>
+              <span class="detail-index">02</span><h3>Defesa de direitos</h3><p>Uma leitura cuidadosa do problema para separar fatos, documentos, riscos e caminhos de atuação antes de qualquer decisão.</p><ul><li>Leitura dos fatos</li><li>Organização das informações</li><li>Definição de prioridades</li></ul><a class="arrow-link" href="#contato">Conversar sobre este tema <span aria-hidden="true">↘</span></a>
+            </article>
+            <article class="practice-detail-panel" id="practice-panel-estrategia" role="tabpanel" aria-labelledby="practice-tab-estrategia" data-practice-panel="estrategia" hidden>
+              <span class="detail-index">03</span><h3>Orientação estratégica</h3><p>Para decisões que pedem clareza antes de agir: reunimos o contexto, avaliamos alternativas e explicamos o que cada caminho envolve.</p><ul><li>Antecipação de cenários</li><li>Explicação sem juridiquês</li><li>Plano de próximos passos</li></ul><a class="arrow-link" href="#contato">Conversar sobre este tema <span aria-hidden="true">↘</span></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="process section-wrap" id="processo" aria-labelledby="process-title" data-section-label="Processo">
+        <div class="section-kicker"><span>Nosso processo</span></div>
+        <div class="process-head"><div><p class="eyebrow">Do primeiro relato ao próximo passo</p><h2 id="process-title">Entender antes de<br /><em>conduzir.</em></h2></div><p>Uma boa orientação começa pela escuta. Por isso, tornamos visível o que acontece entre a primeira mensagem e a definição do caminho.</p></div>
+        <div class="process-layout">
+          <div class="process-steps" role="tablist" aria-label="Etapas do atendimento">
+            <button class="process-step is-active" type="button" role="tab" aria-selected="true" aria-controls="process-panel-1" data-process-step="1"><span>01</span><strong>Escutar</strong><small>Entender o contexto</small></button>
+            <button class="process-step" type="button" role="tab" aria-selected="false" aria-controls="process-panel-2" data-process-step="2"><span>02</span><strong>Organizar</strong><small>Separar fatos e dúvidas</small></button>
+            <button class="process-step" type="button" role="tab" aria-selected="false" aria-controls="process-panel-3" data-process-step="3"><span>03</span><strong>Conduzir</strong><small>Explicar possibilidades</small></button>
+            <button class="process-step" type="button" role="tab" aria-selected="false" aria-controls="process-panel-4" data-process-step="4"><span>04</span><strong>Acompanhar</strong><small>Manter a conversa clara</small></button>
+          </div>
+          <div class="process-panels">
+            <article class="process-panel is-active" id="process-panel-1" role="tabpanel" data-process-panel="1"><span class="process-panel-number">01</span><h3>O que está acontecendo?</h3><p>Você começa contando a situação com as palavras que tiver. A primeira conversa serve para compreender o contexto, não para exigir que você já saiba traduzir tudo para o juridiquês.</p></article>
+            <article class="process-panel" id="process-panel-2" role="tabpanel" data-process-panel="2" hidden><span class="process-panel-number">02</span><h3>O que precisa ser organizado?</h3><p>Depois, fatos, documentos, prazos e dúvidas são colocados em ordem. Essa organização ajuda a reconhecer o que é urgente e o que pode ser decidido com mais calma.</p></article>
+            <article class="process-panel" id="process-panel-3" role="tabpanel" data-process-panel="3" hidden><span class="process-panel-number">03</span><h3>Quais caminhos existem?</h3><p>As possibilidades são apresentadas com clareza, incluindo os pontos de atenção de cada uma. A decisão é construída a partir da realidade do caso.</p></article>
+            <article class="process-panel" id="process-panel-4" role="tabpanel" data-process-panel="4" hidden><span class="process-panel-number">04</span><h3>Como seguimos daqui?</h3><p>Com o próximo passo compreendido, a comunicação permanece objetiva para que você acompanhe o andamento e saiba onde cada decisão se encaixa.</p></article>
+          </div>
+        </div>
+      </section>
+
       <section class="team section-wrap" id="equipe" aria-labelledby="team-title" data-section-label="Equipe">
         <div class="section-kicker"><span>A equipe</span></div><div class="team-head"><p class="eyebrow">Duas pessoas, um jeito de fazer</p><h2 id="team-title">Conheça quem<br /><em>está ao seu lado.</em></h2></div>
         <div class="team-grid"><article class="person person-mariana"><div class="person-photo"><img src="assets/mariana.png" alt="Mariana Albino sorrindo diante de uma estante" width="909" height="603" loading="lazy" /><span class="person-label">Mariana</span></div><div class="person-info"><p class="person-role">Advogada · Direito de família</p><h3>Mariana<br /><em>Albino</em></h3><p>Advocacia humanizada, perspectiva de gênero e defesa dos direitos de mulheres, crianças e minorias.</p><a class="arrow-link" href="https://www.instagram.com/marianaalbino.adv/" target="_blank" rel="noreferrer">Ver perfil</a></div></article><article class="person person-diogo"><div class="person-info"><p class="person-role">Advogado</p><h3>Diogo<br /><em>Bayao</em></h3><p>Uma atuação cuidadosa, com pensamento estratégico e atenção ao que torna cada caso único.</p><a class="arrow-link" href="https://www.instagram.com/diogobayao/" target="_blank" rel="noreferrer">Ver perfil</a></div><div class="person-photo"><img src="assets/diogo.png" alt="Diogo Bayao em uma praça histórica" width="160" height="160" loading="lazy" /><span class="person-label">Diogo</span></div></article></div>
+      </section>
+
+      <section class="faq section-wrap" id="duvidas" aria-labelledby="faq-title" data-section-label="Dúvidas">
+        <div class="section-kicker"><span>Dúvidas frequentes</span></div>
+        <div class="faq-layout"><div><p class="eyebrow">Antes de escrever</p><h2 id="faq-title">Informação clara para<br /><em>começar a conversa.</em></h2><p class="faq-intro">Estas respostas ajudam a entender o primeiro contato. Cada situação é analisada individualmente.</p><a class="arrow-link" href="#contato">Ainda ficou uma dúvida? <span aria-hidden="true">↘</span></a></div><div class="faq-list">
+          <details open><summary>Como funciona o primeiro contato?</summary><p>Você pode enviar uma mensagem pelo formulário ou pelo WhatsApp. Conte, com liberdade, o que está acontecendo e a equipe orientará a melhor forma de continuar a conversa.</p></details>
+          <details><summary>Preciso ter todos os documentos em mãos?</summary><p>Não é necessário começar com tudo resolvido. Se você já tiver documentos ou prazos importantes, eles podem ajudar na compreensão do contexto; o essencial é explicar a situação.</p></details>
+          <details><summary>Posso falar mesmo sem saber qual é a área do meu caso?</summary><p>Sim. A primeira conversa também serve para organizar a questão e identificar quais pontos precisam ser analisados.</p></details>
+          <details><summary>O conteúdo do site substitui uma consulta?</summary><p>Não. As informações são gerais e servem para apresentar o escritório. Uma orientação jurídica depende da análise individual dos fatos e documentos.</p></details>
+          <details><summary>Como envio uma mensagem?</summary><p>Preencha seu nome, e-mail e uma breve descrição no formulário ao final da página. Se preferir, use o botão de WhatsApp para iniciar a conversa.</p></details>
+        </div></div>
       </section>
 
         <section class="contact" id="contato" aria-labelledby="contact-title" data-section-label="Contato"><div class="contact-wrap"><div class="contact-grid"><div><p class="eyebrow light">Conte o que está acontecendo</p><h2 id="contact-title">Vamos resolver seu problema?</h2><p class="contact-copy">Escreva algumas linhas. A equipe retorna para entender a melhor forma de conversar com você.</p><a class="whatsapp-link" href="https://wa.me/553595664780" target="_blank" rel="noreferrer"><span>Falar pelo WhatsApp</span></a></div><form class="contact-form" id="contact-form"><label>Seu nome<input type="text" name="nome" autocomplete="name" placeholder="Como podemos chamar você?" required /></label><label>Seu e-mail<input type="email" name="email" autocomplete="email" placeholder="voce@email.com" required /></label><label>Mensagem<textarea name="mensagem" rows="3" placeholder="Como podemos te ajudar?" required></textarea></label><button type="submit" class="button button-cream">Enviar mensagem</button><p class="form-status" aria-live="polite"></p></form></div></div></section>
     </main>
 
     <footer class="site-footer"><div class="footer-main"><a class="logo" href="#inicio"><span class="logo-symbol">A<span>/</span>B</span><span class="logo-name">ALBINO <i>&</i> BAYAO</span></a><p>Mariana Albino &amp; Diogo Bayao<br /><em>Advogados</em></p><a class="back-top" href="#inicio">Voltar ao topo <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© 2026 Albino & Bayao</span><span>Escritório de advocacia</span><a href="https://www.instagram.com/marianaalbino.adv/" target="_blank" rel="noreferrer">Instagram <span aria-hidden="true">↗</span></a></div></footer>
-    <script src="script.js?v=interactive-v1" defer></script>
+    <script src="script.js?v=complete-v2c" defer></script>
   </body>
 </html>
+
