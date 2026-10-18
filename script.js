@@ -38,6 +38,58 @@
   window.addEventListener('resize', requestScrollSync, { passive: true });
   syncScrollState();
 
+  // Word-by-word blur entrance, adapted from the requested TextEffect preset.
+  // Existing HTML and emphasis remain intact; screen readers receive one phrase.
+  const textEffectSelector = [
+    'main h1', 'main h2', 'main h3', 'main p', 'main li', 'main a', 'main button', 'main label', 'main summary',
+    '.site-header .logo-name', '.site-header .header-cta', '.site-header .continuous-tabs a',
+    '.person-label', '.detail-index', '.process-panel-number', '.footer-main p', '.footer-bottom span',
+  ].join(', ');
+  const textEffectElements = [...document.querySelectorAll(textEffectSelector)].filter((element) => {
+    if (!element.textContent.trim() || element.closest('[aria-hidden="true"]')) return false;
+    return !element.parentElement?.closest(textEffectSelector);
+  });
+  const textEffectObserver = 'IntersectionObserver' in window && !reduceMotion.matches
+    ? new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-text-effect-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 })
+    : null;
+  textEffectElements.forEach((element, elementIndex) => {
+    const phrase = element.textContent.trim().replace(/\s+/g, ' ');
+    element.setAttribute('aria-label', phrase);
+    element.dataset.textEffect = 'word-blur';
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode);
+    let wordIndex = 0;
+    textNodes.forEach((node) => {
+      const parts = node.nodeValue?.split(/(\s+)/) || [];
+      if (!parts.some((part) => part.trim())) return;
+      const fragment = document.createDocumentFragment();
+      parts.forEach((part) => {
+        if (!part.trim()) {
+          fragment.append(document.createTextNode(part));
+          return;
+        }
+        const word = document.createElement('span');
+        word.className = 'text-effect-word';
+        word.setAttribute('aria-hidden', 'true');
+        word.style.setProperty('--word-index', String(Math.min(wordIndex, 18)));
+        word.style.setProperty('--text-effect-delay', `${(elementIndex % 4) * 35}ms`);
+        word.textContent = part;
+        fragment.append(word);
+        wordIndex += 1;
+      });
+      node.parentNode?.replaceChild(fragment, node);
+    });
+    if (textEffectObserver) textEffectObserver.observe(element);
+    else element.classList.add('is-text-effect-visible');
+  });
+
   const revealTargets = [
     ...document.querySelectorAll('.intro-grid, .quote-card, .practice-head, .practice-card, .practice-detail-layout, .practice-detail-panel, .process-head, .process-layout, .team-head, .person, .faq-layout, .contact-grid, .site-footer'),
   ];
