@@ -41,7 +41,7 @@
   // Word-by-word blur entrance, adapted from the requested TextEffect preset.
   // Existing HTML and emphasis remain intact; screen readers receive one phrase.
   const textEffectSelector = [
-    'main h1', 'main h2', 'main h3', 'main p', 'main li', 'main a', 'main button', 'main label', 'main summary',
+    'main h1', 'main h2', 'main h3', 'main p:not(.eyebrow)', 'main li', 'main a', 'main summary',
     '.site-header .logo-name', '.site-header .header-cta', '.site-header .continuous-tabs a',
     '.person-label', '.detail-index', '.process-panel-number', '.footer-main p', '.footer-bottom span',
   ].join(', ');
@@ -62,7 +62,15 @@
     const phrase = element.textContent.trim().replace(/\s+/g, ' ');
     element.setAttribute('aria-label', phrase);
     element.dataset.textEffect = 'word-blur';
-    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    let textRoot = element;
+    if (element.children.length === 0) {
+      const content = document.createElement('span');
+      content.className = 'text-effect-content';
+      while (element.firstChild) content.append(element.firstChild);
+      element.append(content);
+      textRoot = content;
+    }
+    const walker = document.createTreeWalker(textRoot, NodeFilter.SHOW_TEXT);
     const textNodes = [];
     while (walker.nextNode()) textNodes.push(walker.currentNode);
     let wordIndex = 0;
