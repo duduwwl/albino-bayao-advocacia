@@ -1283,3 +1283,29 @@ html { scroll-padding-top: 92px; }
   .continuous-tabs-mobile { position: fixed !important; top: 76px; }
 }
 
+/* Scroll-led header: it clears the reading field on descent and returns on ascent. */
+.site-header { will-change: transform; }
+.site-header.is-scrolling-down { transform: translateY(calc(-100% - 2px)); }
+.site-header.is-scrolling-up { transform: translateY(0); }
+
+/* TextEffect per-char/fade: the original text remains the accessible label. */
+[data-text-effect="per-char-fade"] .text-effect-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(.35em);
+}
+[data-text-effect="per-char-fade"].is-text-effect-visible .text-effect-char {
+  animation: textEffectFade .58s var(--motion-ease) forwards;
+  animation-delay: calc(var(--text-effect-delay, 0ms) + var(--char-index, 0) * 12ms);
+}
+@keyframes textEffectFade {
+  from { opacity: 0; transform: translateY(.35em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header.is-scrolling-down,
+  .site-header.is-scrolling-up { transform: none; }
+  [data-text-effect="per-char-fade"] .text-effect-char { opacity: 1; transform: none; animation: none; }
+}
+
