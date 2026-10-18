@@ -27,7 +27,7 @@ button, a, input, textarea { touch-action: manipulation; }
 .skip-link { position: fixed; top: 14px; left: 14px; z-index: 20; padding: 10px 14px; background: var(--forest); color: var(--cream); transform: translateY(-150%); }
 .skip-link:focus { transform: none; }
 
-.site-header { position: static; top: auto; z-index: 5; height: 82px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 30px; padding: 0 clamp(24px, 5vw, 76px); background: rgba(255, 255, 255, .92); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+.site-header { position: sticky; top: 0; z-index: 20; height: 82px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 30px; padding: 0 clamp(24px, 5vw, 76px); background: rgba(255, 255, 255, .92); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
 .logo { display: inline-flex; align-items: center; gap: 14px; width: max-content; color: var(--forest); text-decoration: none; }
 .logo-symbol { font-size: 20px; font-weight: 800; letter-spacing: -.14em; line-height: 1; }
 .logo-symbol span { margin: 0 2px; font-family: var(--serif); font-style: italic; font-weight: 500; }
@@ -1273,13 +1273,13 @@ html { scroll-padding-top: 92px; }
   .continuous-tabs-mobile { transition: none; }
 }
 
-/* The navigation belongs to the page flow; compact tabs stay quiet and legible. */
-.site-header { position: static !important; top: auto !important; min-height: 76px; height: 76px; }
-.continuous-tabs { min-height: 34px; padding: 2px; gap: 0; }
-.continuous-tabs a { min-height: 27px; padding: 0 8px; font-size: 9px; letter-spacing: -.035em; }
-.continuous-tabs-indicator { top: var(--tab-y, 2px); height: var(--tab-height, 27px); }
+/* The header follows the page while remaining available as a quiet wayfinding rail. */
+.site-header { position: sticky !important; top: 0 !important; z-index: 20; min-height: 76px; height: 76px; }
+.continuous-tabs { width: min(100%, 520px); min-height: 40px; padding: 4px 5px; gap: 2px; justify-content: center; }
+.continuous-tabs a { min-height: 31px; padding: 0 11px; font-size: 9px; letter-spacing: -.025em; }
+.continuous-tabs-indicator { top: var(--tab-y, 4px); height: var(--tab-height, 31px); }
 
 @media (max-width: 820px) {
-  .continuous-tabs-mobile { position: absolute !important; top: 76px; }
+  .continuous-tabs-mobile { position: fixed !important; top: 76px; }
 }
 
