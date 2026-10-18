@@ -42,7 +42,7 @@
   // Existing HTML and emphasis remain intact; screen readers receive one phrase.
   const textEffectSelector = [
     'main h1', 'main h2', 'main h3', 'main p:not(.eyebrow)', 'main li', 'main a', 'main summary',
-    '.site-header .logo-name', '.site-header .header-cta', '.site-header .continuous-tabs a',
+    '.site-header .logo-name', '.site-header .continuous-tabs a',
     '.person-label', '.detail-index', '.process-panel-number', '.footer-main p', '.footer-bottom span',
   ].join(', ');
   const textEffectElements = [...document.querySelectorAll(textEffectSelector)].filter((element) => {
@@ -87,7 +87,7 @@
         word.className = 'text-effect-word';
         word.setAttribute('aria-hidden', 'true');
         word.style.setProperty('--word-index', String(Math.min(wordIndex, 18)));
-        word.style.setProperty('--text-effect-delay', `${(elementIndex % 4) * 35}ms`);
+        word.style.setProperty('--text-effect-delay', `${(elementIndex % 4) * 24}ms`);
         word.textContent = part;
         fragment.append(word);
         wordIndex += 1;
@@ -330,4 +330,3 @@
     }, 700);
   });
 })();
-
