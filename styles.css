@@ -1273,3 +1273,13 @@ html { scroll-padding-top: 92px; }
   .continuous-tabs-mobile { transition: none; }
 }
 
+/* The navigation belongs to the page flow; the compact tabs remain visible without dominating the header. */
+.site-header { position: relative; top: auto; min-height: 76px; height: 76px; }
+.continuous-tabs { min-height: 38px; padding: 3px; gap: 1px; }
+.continuous-tabs a { min-height: 30px; padding: 0 10px; font-size: 9px; letter-spacing: -.02em; }
+.continuous-tabs-indicator { top: var(--tab-y, 3px); height: var(--tab-height, 30px); }
+
+@media (max-width: 820px) {
+  .continuous-tabs-mobile { top: 76px; }
+}
+
