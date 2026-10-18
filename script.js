@@ -15,6 +15,7 @@
     const open = mobileNav?.classList.toggle('is-open') ?? false;
     menuButton.setAttribute('aria-expanded', String(open));
     menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    if (open) window.requestAnimationFrame(() => syncAllContinuousTabs?.());
   });
   mobileNav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileNav));
 
@@ -38,7 +39,7 @@
   syncScrollState();
 
   const revealTargets = [
-    ...document.querySelectorAll('.intro-grid, .quote-card, .practice-head, .practice-card, .team-head, .person, .contact-grid, .site-footer'),
+    ...document.querySelectorAll('.intro-grid, .quote-card, .practice-head, .practice-card, .practice-detail-layout, .practice-detail-panel, .process-head, .process-layout, .team-head, .person, .faq-layout, .contact-grid, .site-footer'),
   ];
   revealTargets.forEach((element, index) => {
     element.setAttribute('data-reveal', element.classList.contains('practice-card') ? 'soft' : 'up');
@@ -60,6 +61,40 @@
 
   const navLinks = [...document.querySelectorAll('.desktop-nav a, .mobile-nav a')];
   const sections = [...document.querySelectorAll('[data-section-label]')];
+  const continuousTabs = [...document.querySelectorAll('[data-continuous-tabs], .continuous-tabs-mobile')];
+  const syncContinuousTabs = (container) => {
+    const indicator = container?.querySelector('.continuous-tabs-indicator');
+    const active = container?.querySelector('a[aria-current="page"]') || container?.querySelector('a[href="#inicio"]');
+    if (!indicator || !active) return;
+    const containerRect = container.getBoundingClientRect();
+    const tabRect = active.getBoundingClientRect();
+    container.style.setProperty('--tab-x', `${tabRect.left - containerRect.left}px`);
+    container.style.setProperty('--tab-y', `${tabRect.top - containerRect.top}px`);
+    container.style.setProperty('--tab-width', `${tabRect.width}px`);
+    container.style.setProperty('--tab-height', `${tabRect.height}px`);
+  };
+  const syncAllContinuousTabs = () => continuousTabs.forEach(syncContinuousTabs);
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => window.setTimeout(syncAllContinuousTabs, 40));
+    link.addEventListener('focus', () => {
+      const container = link.closest('.continuous-tabs, .continuous-tabs-mobile');
+      container?.classList.add('is-focus-preview');
+      container?.style.setProperty('--tab-x', `${link.offsetLeft}px`);
+      container?.style.setProperty('--tab-width', `${link.offsetWidth}px`);
+    });
+  });
+  continuousTabs.forEach((container) => {
+    container.addEventListener('mouseleave', () => {
+      container.classList.remove('is-focus-preview');
+      syncContinuousTabs(container);
+    });
+    container.addEventListener('focusout', (event) => {
+      if (!container.contains(event.relatedTarget)) {
+        container.classList.remove('is-focus-preview');
+        syncContinuousTabs(container);
+      }
+    });
+  });
   if ('IntersectionObserver' in window) {
     const activeObserver = new IntersectionObserver((entries) => {
       const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -69,9 +104,50 @@
         if (link.getAttribute('href') === activeId) link.setAttribute('aria-current', 'page');
         else link.removeAttribute('aria-current');
       });
+      syncAllContinuousTabs();
     }, { rootMargin: '-24% 0px -58% 0px', threshold: [0, .2, .6] });
     sections.forEach((section) => activeObserver.observe(section));
   }
+  navLinks.filter((link) => link.getAttribute('href') === '#escritorio').forEach((link) => link.setAttribute('aria-current', 'page'));
+  syncAllContinuousTabs();
+  window.addEventListener('resize', syncAllContinuousTabs, { passive: true });
+
+  const setupTabs = ({ tabSelector, panelSelector, tabAttribute, panelAttribute, activeClass = 'is-active' }) => {
+    const tabs = [...document.querySelectorAll(tabSelector)];
+    const panels = [...document.querySelectorAll(panelSelector)];
+    if (!tabs.length || !panels.length) return;
+    const activate = (value, focus = false) => {
+      tabs.forEach((tab) => {
+        const active = tab.dataset[tabAttribute] === value;
+        tab.classList.toggle(activeClass, active);
+        tab.setAttribute('aria-selected', String(active));
+        if (focus) tab.focus();
+      });
+      panels.forEach((panel) => {
+        const active = panel.dataset[panelAttribute] === value;
+        panel.classList.toggle(activeClass, active);
+        panel.hidden = !active;
+      });
+    };
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(tab.dataset[tabAttribute]));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = tabs.length - 1;
+        activate(tabs[next].dataset[tabAttribute], true);
+      });
+    });
+    const initial = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+    activate(initial.dataset[tabAttribute]);
+  };
+
+  setupTabs({ tabSelector: '[data-practice-tab]', panelSelector: '[data-practice-panel]', tabAttribute: 'practiceTab', panelAttribute: 'practicePanel' });
+  setupTabs({ tabSelector: '[data-process-step]', panelSelector: '[data-process-panel]', tabAttribute: 'processStep', panelAttribute: 'processPanel' });
 
   const carousel = document.querySelector('[data-hero-carousel]');
   const slides = carousel ? [...carousel.querySelectorAll('.hero-slide')] : [];
@@ -194,3 +270,4 @@
     }, 700);
   });
 })();
+
