@@ -1288,5 +1288,31 @@ body { padding-top: 76px; }
   .continuous-tabs-mobile { position: fixed !important; top: 76px; }
 }
 
+/* Per-word blur entrance inspired by the supplied TextEffect example. */
+[data-text-effect="word-blur"] .text-effect-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(.22em);
+  will-change: opacity, filter, transform;
+}
+[data-text-effect="word-blur"].is-text-effect-visible .text-effect-word {
+  animation: textEffectWordBlur 680ms cubic-bezier(.2, .72, .2, 1) forwards;
+  animation-delay: calc(var(--text-effect-delay, 0ms) + var(--word-index, 0) * 48ms);
+}
+@keyframes textEffectWordBlur {
+  from { opacity: 0; filter: blur(8px); transform: translateY(.22em); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-text-effect="word-blur"] .text-effect-word {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    animation: none;
+    will-change: auto;
+  }
+}
+
 
 
